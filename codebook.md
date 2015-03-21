@@ -34,4 +34,26 @@ Additional descriptions regarding the physical meaning of the data can be found 
 
 
 ### Processed data
-The
+Following the instrucions of the project the following additional datasets were created and transformed:
+
+
+- 'test': Contains the merged data for 'subject_test', 'Y_test' and 'X_test'.
+- 'train': Contains the merged data for 'subject_train', 'Y_train' and 'X_train'.
+- 'fulldata': Contains the merged data for 'test' and 'train.
+- 'fulldata.ss': Contains a subset of the data from 'fulldata', only extracting out mean and standard deviations for each measurement.
+- 'tidyData': Contains an independent tidy data set with the average of each variable for each activity and each subject, using data taken from 'fulldata.ss'.
+
+In order to use more intuitive names, the built-in funcion gsub() has been repeatedly used in order to make changes to the variables. The variable names are made more intuitive by makeing the following replacements:
+
+- t -> time
+- f -> frequency
+- Acc -> Accelerometer
+- Gyro -> Gyroscope
+- Mag -> Magnitude
+- BodyBody -> Body
+
+## Output
+The R script run_analysis.R generates the following two data files:
+
+'processeddata.txt': Contains the desired data (10,299 observations of the 68 variables). The first two variables contain the subject ID number and the specific activity. The other 66 variables correspond to the different values of the mean and standard deviation obtained for the different features.
+'tidydata.txt': Contains the desired data of averages (180 observations of the 68 variables). The first two variables contain the subject ID number and the specific activity. The other 66 variables correspond to the average of each variable for each subject and each activity, as specified by the project instructions.
