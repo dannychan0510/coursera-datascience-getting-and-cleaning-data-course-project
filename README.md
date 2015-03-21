@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #Coursera Data Science Specialisation: Getting and Cleaning Data Course Project
 The R script run_analysis.R has been created following the project instructions:
 
@@ -12,3 +13,5 @@ As a result, the script process the initial data (collected from the acceleromet
 1. ProcessedData.txt: Contains the desired data (measurements of mean and standard deviation) for each subject and activity.
 2. TidyAveragesData.txt: Contains the data corresponding to the average for each subject and activity.
 Data:
+=======
+>>>>>>> Stashed changes

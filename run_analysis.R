@@ -63,32 +63,32 @@ fulldata <- as.data.table(rbind(test, train))
 
 # extracts only the mean and sd for each measurement
 fulldata_varnames <- names(fulldata)
-extract <- grep("mean|std\\(\\)", fulldata_varnames)
-fulldata.ss <- subset(fulldata, select = c(1, 2, extract))
+extract <- grepl("-(mean|std)\\(\\)", fulldata_varnames)
+fulfulldata.ss <- subset(fulldata, select = c(1, 2, extract))
 
 
 ### Step 3: Use descriptive activity names to name the activities in the data set
 
 # merge fuldata.ss with activity labels
 names(activity_labels) <- c("activity", "activity_labels")
-mfulldata.ss <- merge(fulldata.ss, activity_labels, by = "activity")
+fulldata.ss <- merge(fulldata.ss, activity_labels, by = "activity")
 
 
 ### Step 4: Appropriately labels the data set with descriptive variable names.
 
 # making variable names in mfulldata.ss more intuitive
-names(mfulldata.ss)<-gsub("^t", "time", names(mfulldata.ss))
-names(mfulldata.ss)<-gsub("^f", "frequency", names(mfulldata.ss))
-names(mfulldata.ss)<-gsub("Acc", "Accelerometer", names(mfulldata.ss))
-names(mfulldata.ss)<-gsub("Gyro", "Gyroscope", names(mfulldata.ss))
-names(mfulldata.ss)<-gsub("Mag", "Magnitude", names(mfulldata.ss))
-names(mfulldata.ss)<-gsub("BodyBody", "Body", names(mfulldata.ss))
+names(fulldata.ss)<-gsub("^t", "time", names(fulldata.ss))
+names(fulldata.ss)<-gsub("^f", "frequency", names(fulldata.ss))
+names(fulldata.ss)<-gsub("Acc", "Accelerometer", names(fulldata.ss))
+names(fulldata.ss)<-gsub("Gyro", "Gyroscope", names(fulldata.ss))
+names(fulldata.ss)<-gsub("Mag", "Magnitude", names(fulldata.ss))
+names(fulldata.ss)<-gsub("BodyBody", "Body", names(fulldata.ss))
 
 
 ## Step 5: Creates a second, independent tidy data set with the average of each variable for each activity and each subject
 
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-tidyData <- as.data.table(aggregate(. ~subject + activity, mfulldata.ss, mean))
+tidyData <- as.data.table(aggregate(. ~subject + activity, fulldata.ss, mean))
 
 # removing additional column at the end
 tidyData$activity_labels <- NULL
@@ -107,4 +107,11 @@ rm(temp)
 tm(temp2)
 
 # outputting data
+write.table(fulldata.ss, file = "processeddata.txt",row.name=FALSE)
 write.table(tidyData, file = "tidydata.txt",row.name=FALSE)
+
+# cleaning unneccessary data
+rm(extract)
+rm(fulldata_varnames)
+rm(temp)
+rm(temp2)
